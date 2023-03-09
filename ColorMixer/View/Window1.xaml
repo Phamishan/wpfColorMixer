@@ -1,0 +1,51 @@
+﻿<Window x:Class="ColorMixer.View.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ColorMixer.ViewModel"
+        xmlns:local="clr-namespace:ColorMixer.View"
+        mc:Ignorable="d"
+        Title="Window1" Height="650" Width="400">
+    <Window.Resources>
+        <vm:ColorMixerViewModel x:Key="ViewModel"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource ViewModel}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" x:Name="Color"></RowDefinition>
+            
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" x:Name="Red"></RowDefinition>
+            
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" x:Name="GreenColor"></RowDefinition>
+            
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" x:Name="BlueColor"></RowDefinition>
+            
+            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Rectangle Grid.Row="0" Name="Rectangle">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{Binding HexCode}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Label Content="{Binding RedSlider}" ContentStringFormat="Red: {0}" Grid.Row="1"/>
+        <Slider Grid.Row="2" Minimum="0" Maximum="255" Value="{Binding RedSlider}"/>
+
+        <Label Content="{Binding GreenSlider}" ContentStringFormat="Green: {0}" Grid.Row="3"/>
+        <Slider Grid.Row="4" Minimum="0" Maximum="255" Value="{Binding GreenSlider}"/>
+
+        <Label Content="{Binding BlueSlider}" ContentStringFormat="Blue: {0}" Grid.Row="5"/>
+        <Slider Grid.Row="6" Minimum="0" Maximum="255" Value="{Binding BlueSlider}"/>
+        
+        <TextBox Text="{Binding HexCodeInput}" Grid.Row="7"/>
+        
+        <Button Content="Set Color" Grid.Row="8" Command="{Binding ChangeColorHexCommand}"/>
+
+    </Grid>
+</Window>
